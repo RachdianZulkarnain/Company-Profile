@@ -1,18 +1,13 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/sonner";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import type { Metadata } from "next";
+import { Lato } from "next/font/google";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const lato = Lato({
+  subsets: ["latin"], // Specify subsets
+  weight: ["400", "700"], // Specify font weights
 });
 
 export const metadata: Metadata = {
@@ -27,13 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${lato.className} antialiased`}>
         <ReactQueryProvider>
-          <Navbar/>
+          <Navbar />
           {children}
-          </ReactQueryProvider>
+        </ReactQueryProvider>
         <Toaster richColors position="top-center" />
       </body>
     </html>
