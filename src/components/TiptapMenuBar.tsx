@@ -27,7 +27,7 @@ const TiptapMenuBar: FC<TiptapMenuBarProps> = ({ editor }) => {
       preesed: editor.isActive("heading", { level: 3 }),
     },
     {
-      icon: <Bold className="size-4 " />,
+      icon: <Bold className="size-4" />,
       onClick: () => editor.chain().focus().toggleBold().run(),
       preesed: editor.isActive("bold"),
     },
@@ -39,12 +39,14 @@ const TiptapMenuBar: FC<TiptapMenuBarProps> = ({ editor }) => {
   ];
 
   return (
-    <div className="border rounded-md p-1 space-x-2 my-3">
+    <div className="border rounded-md p-1 space-x-2 my-3 flex flex-wrap bg-white shadow-sm transition-all duration-300">
       {options.map((option, index) => (
         <Toggle
           key={index}
           pressed={option.preesed}
           onPressedChange={option.onClick}
+          className="transition-all duration-200 ease-in-out data-[state=on]:bg-indigo-100 
+            data-[state=on]:text-indigo-600 hover:scale-105 active:scale-95"
         >
           {option.icon}
         </Toggle>

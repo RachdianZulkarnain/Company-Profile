@@ -27,14 +27,18 @@ interface TeamMemberProps {
 }
 
 const StatItem: React.FC<StatItemProps> = ({ label, value }) => (
-  <div
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: 0.2 }}
     className="flex flex-col items-center border-b md:border-b-0 
     md:border-l border-gray-200 px-4 py-6 first:border-l-0 
     flex-1 text-center"
   >
     <h3 className="text-[#7b7b7b] text-base mb-4">{label}</h3>
     <span className="text-4xl md:text-5xl lg:text-6xl font-light">{value}</span>
-  </div>
+  </motion.div>
 );
 
 const SocialIcon: React.FC<{ href: string; icon: React.ReactNode }> = ({
@@ -57,27 +61,33 @@ const TeamMember: React.FC<TeamMemberProps> = ({
   role,
   description,
   social,
+  index,
 }) => (
-  <motion.div className="flex flex-col h-full">
-    <div className="relative overflow-hidden group ">
-      <motion.div transition={{ duration: 0.4 }} className="h-full">
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{
+      duration: 0.6,
+      delay: index * 0.1,
+      ease: "easeOut",
+    }}
+    className="flex flex-col h-full"
+  >
+    <div className="relative overflow-hidden group rounded-md shadow-sm">
+      <motion.div
+        className="h-full"
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
         <Image
-          height={10000}
-          width={10000}
+          height={500}
+          width={500}
           src={image}
           alt={name}
-          className="object-cover 
-            h-[300px] 
-            
-            w-full "
+          className="object-cover h-[300px] w-full"
         />
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="absolute inset-0 bg-opacity-20"
-      />
     </div>
     <div className="pt-6 space-y-3 flex-1">
       <h3 className="font-medium text-xl">{name}</h3>
@@ -118,7 +128,6 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description: "Passionate about sustainable design and product aesthetics.",
     social: {
       linkedin: "https://linkedin.com/in/emilyjohnson",
-      //   twitter: "https://twitter.com/emilyjohnson",
       website: "https://emilyjohnson.design",
     },
   },
@@ -130,7 +139,6 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
       "Engineer by heart, specializing in functional 3D-printed mechanisms.",
     social: {
       linkedin: "https://linkedin.com/in/michaellee",
-      //   twitter: "https://twitter.com/michaellee",
       website: "https://michaelengineer.dev",
     },
   },
@@ -142,7 +150,6 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
       "Loves combining storytelling with design to create immersive visuals.",
     social: {
       linkedin: "https://linkedin.com/in/sofiaramirez",
-      //   twitter: "https://twitter.com/sofiaramirez",
       website: "https://sofiavisuals.com",
     },
   },
@@ -154,7 +161,6 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
       "Focuses on print optimization and material testing for high-detail projects.",
     social: {
       linkedin: "https://linkedin.com/in/dylansmith",
-      //   twitter: "https://twitter.com/dylansmith",
       website: "https://dylanprints.com",
     },
   },
@@ -166,7 +172,6 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
       "Bridges user needs and design for seamless product interactions.",
     social: {
       linkedin: "https://linkedin.com/in/aishatan",
-      //   twitter: "https://twitter.com/aishatan",
       website: "https://aishatan.io",
     },
   },
@@ -178,7 +183,6 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
       "Builds intuitive interfaces and loves working with 3D visualization tools.",
     social: {
       linkedin: "https://linkedin.com/in/kevinpark",
-      //   twitter: "https://twitter.com/kevinpark",
       website: "https://kevinpark.dev",
     },
   },
@@ -197,10 +201,7 @@ const Team = () => {
           <p className="text-xl uppercase tracking-wider text-gray-500 mb-6">
             /Team
           </p>
-          <p
-            className="text-[#7b7b7b]
-           max-w-3xl text-lg"
-          >
+          <p className="text-[#7b7b7b] max-w-3xl text-lg">
             Our team is made up of dedicated professionals with diverse
             expertise in design, engineering, and digital manufacturing. With
             backgrounds in mechanical engineering, visual arts, and 3D printing
@@ -213,20 +214,15 @@ const Team = () => {
           </p>
         </motion.div>
 
-        <div
-          className="flex flex-col
-         md:flex-row flex-wrap md:flex-nowrap 
-         justify-between w-full mb-20"
-        >
+        {/* Stats Section */}
+        <div className="flex flex-col md:flex-row flex-wrap md:flex-nowrap justify-between w-full mb-20">
           {stats.map((stat, index) => (
             <StatItem key={index} label={stat.label} value={stat.value} />
           ))}
         </div>
 
-        <div
-          className="grid grid-cols-1
-         md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
-        >
+        {/* Team Members */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {teamMembers.map((member, index) => (
             <TeamMember key={index} {...member} index={index} />
           ))}

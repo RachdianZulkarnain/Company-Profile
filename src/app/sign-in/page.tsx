@@ -19,7 +19,7 @@ const SignIn = () => {
   const { mutateAsync: login, isPending } = useLogin();
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-100 px-4">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-100 px-4 sm:px-6">
       <Card className="w-full max-w-md bg-white shadow-xl rounded-xl border border-gray-200">
         <Formik
           initialValues={{ email: "", password: "" }}
@@ -27,8 +27,8 @@ const SignIn = () => {
             await login({ login: values.email, password: values.password });
           }}
         >
-          <Form className="space-y-6">
-            <CardHeader className="text-center">
+          <Form className="space-y-6 p-4 sm:p-6">
+            <CardHeader className="text-center space-y-1">
               <CardTitle className="text-3xl font-bold text-indigo-600">
                 Sign In
               </CardTitle>
@@ -66,7 +66,7 @@ const SignIn = () => {
                   name="password"
                   as={Input}
                   type="password"
-                  placeholder="••••••••"
+                  placeholder="********"
                   className="focus-visible:ring-indigo-500"
                 />
                 <ErrorMessage
@@ -77,7 +77,7 @@ const SignIn = () => {
               </div>
             </CardContent>
 
-            <CardFooter className="flex flex-col gap-4">
+            <CardFooter className="flex flex-col gap-4 pt-2">
               <Button
                 type="submit"
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white transition-colors duration-300"

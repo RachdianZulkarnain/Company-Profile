@@ -9,12 +9,15 @@ const BlogDetail = async ({
   params: Promise<{ objectId: string }>;
 }) => {
   const objectId = (await params).objectId;
+
   return (
-    <main className="container mx-auto px-4 pb-20">
-      <Suspense fallback={<Loading/>}>
-        <BlogHeader objectId={objectId} />
-        <BlogBody objectId={objectId} />
-      </Suspense>
+    <main className="w-full px-4 py-10">
+      <div className="max-w-screen-lg mx-auto space-y-10">
+        <Suspense fallback={<Loading />}>
+          <BlogHeader objectId={objectId} />
+          <BlogBody objectId={objectId} />
+        </Suspense>
+      </div>
     </main>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { lato } from "@/lib/fonts";
 import { useAuthStore } from "@/stores/auth";
@@ -76,9 +76,9 @@ const Navbar = () => {
         variants={navbarVariants}
         initial="hidden"
         animate={isVisible ? "visible" : "hidden"}
-        className="fixed top-0 left-0 right-0 bg-white z-50 py-4 px-6 md:px-10 shadow-md border-b"
+        className="fixed top-0 left-0 right-0 bg-white z-50 py-4 px-4 sm:px-6 md:px-10 shadow-md border-b"
       >
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="max-w-screen-xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image src="/assets/Logo.png" width={60} height={60} alt="Logo" />
@@ -105,9 +105,9 @@ const Navbar = () => {
               </Link>
             ))}
 
-            {/* BLOG dropdown (conditional) */}
+            {/* BLOG Desktop */}
             <div
-              className="relative"
+              className="relative hidden md:block"
               onMouseEnter={() => setBlogDropdownOpen(true)}
               onMouseLeave={() => setBlogDropdownOpen(false)}
             >
@@ -163,7 +163,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Toggle Button */}
+          {/* Toggle Button */}
           <motion.button
             whileTap={{ rotate: 90, scale: 0.9 }}
             className="md:hidden"
@@ -186,9 +186,9 @@ const Navbar = () => {
               animate="visible"
               exit="hidden"
               variants={mobileMenuVariants}
-              className="md:hidden bg-white border-t shadow-inner"
+              className="md:hidden bg-white border-t shadow-inner w-full px-4 py-6"
             >
-              <div className="flex flex-col items-center space-y-4 p-6">
+              <div className="flex flex-col items-start space-y-4 text-left">
                 {links.map((link) => (
                   <Link
                     key={link.href}
@@ -204,41 +204,82 @@ const Navbar = () => {
                   </Link>
                 ))}
 
-                <div className="pt-2 text-gray-700 font-semibold">BLOG</div>
-                {!user ? (
-                  <>
-                    <Link
-                      href="/sign-in"
-                      onClick={() => setMobileMenuOpen(false)}
+                {/* BLOG mobile with dropdown toggle */}
+                <div className="w-full flex items-center justify-between">
+                  <Link
+                    href="/blog"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-gray-500 hover:text-black font-medium"
+                  >
+                    BLOG
+                  </Link>
+                  <button
+                    onClick={() => setBlogDropdownOpen((prev) => !prev)}
+                    aria-label="Toggle Blog Dropdown"
+                  >
+                    <ChevronDown className="w-5 h-5 text-gray-600" />
+                  </button>
+                </div>
+
+                <AnimatePresence>
+                  {blogDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      className="flex flex-col space-y-2 mt-2 pl-2"
                     >
-                      Sign In
-                    </Link>
-                    <Link
-                      href="/sign-up"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Sign Up
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      href="/write"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Write
-                    </Link>
-                    <Button
-                      variant="destructive"
-                      onClick={() => {
-                        clearAuth();
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      Logout
-                    </Button>
-                  </>
-                )}
+                      {!user ? (
+                        <>
+                          <Link
+                            href="/sign-in"
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setBlogDropdownOpen(false);
+                            }}
+                            className="text-sm text-gray-600 hover:text-black"
+                          >
+                            Sign In
+                          </Link>
+                          <Link
+                            href="/sign-up"
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setBlogDropdownOpen(false);
+                            }}
+                            className="text-sm text-gray-600 hover:text-black"
+                          >
+                            Sign Up
+                          </Link>
+                        </>
+                      ) : (
+                        <>
+                          <Link
+                            href="/write"
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setBlogDropdownOpen(false);
+                            }}
+                            className="text-sm text-gray-600 hover:text-black"
+                          >
+                            Write Blog
+                          </Link>
+                          <Button
+                            variant="destructive"
+                            className="w-fit text-sm"
+                            onClick={() => {
+                              clearAuth();
+                              setMobileMenuOpen(false);
+                              setBlogDropdownOpen(false);
+                            }}
+                          >
+                            Logout
+                          </Button>
+                        </>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
           )}

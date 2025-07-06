@@ -1,17 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
-
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
-    PiArrowArcLeft,
-    PiArrowArcRight
+  PiArrowArcLeft,
+  PiArrowArcRight,
+  PiGlobe,
+  PiLinkedinLogo
 } from "react-icons/pi";
 
 interface Social {
   linkedin: string;
-  twitter: string;
   website?: string;
 }
 
@@ -32,7 +32,6 @@ const founders: Founder[] = [
       "Mewujudkan ide dalam bentuk nyata dengan pencetakan 3D adalah pengalaman luar biasa. Microlab membantu saya merealisasikan desain dengan presisi tinggi.",
     social: {
       linkedin: "https://linkedin.com/in/aryanugraha",
-      twitter: "https://twitter.com/aryanugraha",
     },
   },
   {
@@ -43,7 +42,6 @@ const founders: Founder[] = [
       "Dengan teknologi 3D printing dari Microlab, kami bisa membuat prototipe lebih cepat dan efisien. Ini sangat membantu dalam proses kreatif saya.",
     social: {
       linkedin: "https://linkedin.com/in/sintawirawan",
-      twitter: "https://twitter.com/sintawirawan",
     },
   },
   {
@@ -54,8 +52,7 @@ const founders: Founder[] = [
       "Microlab adalah mitra ideal dalam proyek desain kami. Timnya responsif dan hasil cetaknya sangat memuaskan.",
     social: {
       linkedin: "https://linkedin.com/in/rahmatfadli",
-      twitter: "https://twitter.com/rahmatfadli",
-    },
+     },
   },
   {
     name: "Tania Zahra",
@@ -65,7 +62,6 @@ const founders: Founder[] = [
       "Saya kagum dengan kualitas dan akurasi cetak dari Microlab. Sangat membantu dalam pengembangan komponen mekanik.",
     social: {
       linkedin: "https://linkedin.com/in/taniazahra",
-      twitter: "https://twitter.com/taniazahra",
     },
   },
   {
@@ -76,7 +72,6 @@ const founders: Founder[] = [
       "Microlab memberikan solusi praktis dan cepat untuk kebutuhan cetak 3D dalam proyek robotika kami. Hasilnya presisi dan memuaskan.",
     social: {
       linkedin: "https://linkedin.com/in/dimasharyono",
-      twitter: "https://twitter.com/dimasharyono",
     },
   },
 ];
@@ -86,58 +81,13 @@ const Testimonials = () => {
   const [itemsToShow, setItemsToShow] = useState(4);
   const [isMobile, setIsMobile] = useState(false);
 
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0,
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-        duration: 0.2,
-      },
-    },
-  };
-
-  const item: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.95,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        duration: 0.5,
-        bounce: 0.4,
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      scale: 0.95,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      setItemsToShow(mobile ? 2 : 4);
+      setItemsToShow(mobile ? 1 : 4);
       setStartIndex((prev) => {
-        const maxStart = founders.length - (mobile ? 2 : 4);
+        const maxStart = founders.length - (mobile ? 1 : 4);
         return prev > maxStart ? maxStart : prev;
       });
     };
@@ -145,54 +95,40 @@ const Testimonials = () => {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [founders.length]);
+  }, []);
 
   const next = () => {
-    setStartIndex((prev) => {
-      const nextIndex = prev + 1;
-      const maxStart = founders.length - itemsToShow;
-      return nextIndex > maxStart ? 0 : nextIndex;
-    });
+    setStartIndex((prev) => (prev + 1) % (founders.length - itemsToShow + 1));
   };
 
   const prev = () => {
-    setStartIndex((prev) => {
-      const nextIndex = prev - 1;
-      return nextIndex < 0 ? founders.length - itemsToShow : nextIndex;
-    });
-  };
-
-  type PanInfo = {
-    offset: {
-      x: number;
-      y: number;
-    };
-    velocity: {
-      x: number;
-    };
-  };
-
-  const handleDragEnd = (_event: never, info: PanInfo) => {
-    const swipeThreshold = 50;
-    if (
-      info.offset.x < -swipeThreshold &&
-      startIndex < founders.length - itemsToShow
-    ) {
-      next();
-    } else if (info.offset.x > swipeThreshold && startIndex > 0) {
-      prev();
-    }
+    setStartIndex((prev) =>
+      prev === 0 ? founders.length - itemsToShow : prev - 1
+    );
   };
 
   const visibleFounders = founders.slice(startIndex, startIndex + itemsToShow);
 
+  const container: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const item: Variants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", bounce: 0.3, duration: 0.6 },
+    },
+  };
+
   return (
-    <div
-      className="px-6 
-      mx-auto 2xl:w-4/5 md:px-16
-      
-      py-16 md:py-32"
-    >
+    <section className="px-6 py-16 md:px-16 md:py-24 mx-auto max-w-7xl">
       <div className="flex justify-between items-center mb-12">
         <div>
           <h2 className="text-4xl font-bold mb-2">Testimonials</h2>
@@ -201,86 +137,74 @@ const Testimonials = () => {
           </p>
         </div>
         <div className="hidden md:flex gap-2">
-          <motion.button onClick={prev}>
-            <PiArrowArcLeft className="text-black border rounded-full flex items-center justify-center text-5xl p-3 hover:bg-black/10 transition-colors" />
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+            onClick={prev}
+            className="p-2 border rounded-full hover:bg-black/10 transition-colors"
+          >
+            <PiArrowArcLeft className="text-2xl" />
           </motion.button>
-          <motion.button onClick={next}>
-            <PiArrowArcRight className="text-black border rounded-full flex items-center justify-center text-5xl p-3 hover:bg-black/10 transition-colors" />
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+            onClick={next}
+            className="p-2 border rounded-full hover:bg-black/10 transition-colors"
+          >
+            <PiArrowArcRight className="text-2xl" />
           </motion.button>
         </div>
       </div>
 
-      <div className="relative max-w-full overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8"
-            key={startIndex}
-            variants={container}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            drag={isMobile ? "x" : false}
-            dragSnapToOrigin
-            dragElastic={0.1}
-            onDragEnd={handleDragEnd}
-            style={{
-              touchAction: "none",
-              x: 0,
-            }}
-          >
-            {visibleFounders.map((founder, index) => (
-              <motion.div
-                key={`${founder.name}-${index}`}
-                variants={item}
-                className="md:mb-0 mb-8"
-              >
-                <div className="bg-gray-300 aspect-square mb-4 overflow-hidden rounded-lg">
-                  <Image
-                    priority
-                    width={500}
-                    height={500}
-                    src={founder.image}
-                    alt={founder.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="font-bold text-lg mb-1">{founder.name}</h3>
-                <p className="text-[#7b7b7b] text-sm mb-2">{founder.role}</p>
-                <p className="text-gray-700 text-sm mb-4">
-                  {founder.description}
-                </p>
-                <div className="flex gap-4">
-                  <motion.div
-                    whileHover={{ scale: 1.15 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    {/* <PiLinkedinLogo className="w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer" /> */}
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.15 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    {/* <PiTwitterLogo className="w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer" /> */}
-                  </motion.div>
-                  {founder.social.website && (
-                    <motion.div
-                      whileHover={{ scale: 1.15 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 17,
-                      }}
-                    >
-                      {/* <PiGlobe className="w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer" /> */}
-                    </motion.div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={startIndex}
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid gap-6 sm:grid-cols-2 md:grid-cols-4"
+        >
+          {visibleFounders.map((founder, i) => (
+            <motion.div
+              key={founder.name}
+              variants={item}
+              whileHover={{
+                scale: 1.05,
+                y: -6,
+                boxShadow: "0 12px 24px rgba(0, 0, 0, 0.1)",
+              }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className="bg-white rounded-xl p-4 shadow-md"
+            >
+              <div className="rounded-lg overflow-hidden mb-4">
+                <Image
+                  src={founder.image}
+                  alt={founder.name}
+                  width={500}
+                  height={500}
+                  className="object-cover w-full h-48 rounded-lg"
+                />
+              </div>
+              <h3 className="text-lg font-semibold mb-1">{founder.name}</h3>
+              <p className="text-sm text-gray-500 mb-2">{founder.role}</p>
+              <p className="text-sm text-gray-700 mb-4">
+                {founder.description}
+              </p>
+              <div className="flex gap-3">
+                <a href={founder.social.linkedin} target="_blank">
+                  <PiLinkedinLogo className="text-gray-500 hover:text-gray-900 transition-colors" />
+                </a>
+                {founder.social.website && (
+                  <a href={founder.social.website} target="_blank">
+                    <PiGlobe className="text-gray-500 hover:text-gray-900 transition-colors" />
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+    </section>
   );
 };
 

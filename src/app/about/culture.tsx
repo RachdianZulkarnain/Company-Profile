@@ -1,20 +1,30 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variant, Variants } from "framer-motion";
 
 interface Value {
   title: string;
   description: string;
 }
 
+const itemVariant: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      bounce: 0.2,
+    },
+  },
+};
+
 const CultureValue: React.FC<Value> = ({ title, description }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }} // This ensures the animation only happens once
-      transition={{ duration: 0.5 }}
+      variants={itemVariant}
       className="py-6 border-t border-gray-200"
     >
       <div className="flex flex-col md:flex-row md:items-start md:justify-between">
@@ -25,46 +35,51 @@ const CultureValue: React.FC<Value> = ({ title, description }) => {
   );
 };
 
+const containerVariant = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
 const Culture = () => {
   const values = [
     {
-      title: "Ambitious execution",
+      title: "Innovation First",
       description:
-        "A technically flawless deliverable should be no exception. Our creativity ensures that we bring you the unexpected.",
+        "We thrive on turning bold ideas into reality. By embracing new tools and techniques, we stay ahead—delivering products that redefine what's possible.",
     },
     {
-      title: "Promises kept",
+      title: "Design with Purpose",
       description:
-        "Our promises are well thought out. What we say, we do. What we don't know, we find someone who does (and they're the best). That's Grandpa's lesson.",
+        "Every model we make solves a problem or sparks joy. We believe great design isn't just beautiful—it's functional, thoughtful, and built to last.",
     },
     {
-      title: "Genuine interest",
+      title: "Precision Matters",
       description:
-        "Understanding, helping, learning—that's how we approach relationships. Everyone receives top-notch treatment, without exception.",
+        "From millimeter-perfect prototypes to production-grade prints, we obsess over the details. Because quality isn’t optional—it’s our baseline.",
     },
     {
-      title: "Playful spirit",
+      title: "Client-Centered Collaboration",
       description:
-        "Like us, Bruno was a child at heart: curious, filled with wonder, and intense. The day we lose that is the day we step aside.",
+        "We're not just printers, we're partners. Listening deeply, iterating fast, and building trust are the core of how we work with every client.",
     },
     {
-      title: "Provoked luck",
+      title: "Accessible Technology",
       description:
-        "Luck is an attitude. We don't wait for opportunities—we create them. We try, we learn, we succeed, and we start again. In short, we sow and we reap.",
+        "3D printing should be for everyone. From students to startups, we make cutting-edge fabrication easy to access, understand, and afford.",
     },
   ];
 
   return (
     <div className="min-h-screen bg-white">
-      <div
-        className=" px-6 py-24 md:mx-auto 
-      
-       2xl:w-4/5 md:px-16
-      "
-      >
+      <div className="px-6 py-24 md:mx-auto 2xl:w-4/5 md:px-16">
+        {/* Intro */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="mb-16"
@@ -75,12 +90,19 @@ const Culture = () => {
           <div className="text-[#7b7b7b] text-lg">
             We believe in: <br />
             • Open collaboration between team and clients <br />
-            • Rapid iteration for better product development <br />
-            • Sustainability in material choice and process
+            • Rapid iteration for better product development <br />•
+            Sustainability in material choice and process
           </div>
         </motion.div>
 
-        <div className="space-y-2">
+        {/* Values List */}
+        <motion.div
+          variants={containerVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="space-y-2"
+        >
           {values.map((value, index) => (
             <CultureValue
               key={index}
@@ -88,7 +110,7 @@ const Culture = () => {
               description={value.description}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

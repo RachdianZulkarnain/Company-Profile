@@ -15,12 +15,9 @@ const HeroSection = () => {
   const { scrollY } = useScroll();
 
   useEffect(() => {
-    // Get navigation timing
     const navigation = performance.getEntriesByType(
       "navigation"
     )[0] as PerformanceNavigationTiming;
-
-    // Check if this is a fresh page load or reload
     if (navigation?.type === "reload" || navigation?.type === "navigate") {
       setHasAnimated(false);
     } else {
@@ -28,7 +25,6 @@ const HeroSection = () => {
     }
   }, []);
 
-  // Transform video size and width based on scroll with eased transitions
   const videoScale = useTransform(scrollY, [0, 500], [0.9, 1], {
     ease: easeOut,
   });
@@ -39,49 +35,52 @@ const HeroSection = () => {
     ease: easeOut,
   });
 
-  // Enhanced content animations
   const contentVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 40,
-      filter: "blur(10px)",
+      filter: "blur(12px)",
     },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
       transition: {
-        duration: 0.9,
-        ease: [0.25, 0.1, 0, 1],
-        staggerChildren: 0.1,
+        duration: 1,
+        ease: [0.25, 0.1, 0.25, 1],
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const item: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
 
   const buttonVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.8,
-    },
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.1, 0, 1],
         delay: 0.6,
+        duration: 0.5,
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
 
   const videoContainerVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 60,
-      scale: 0.95,
-    },
+    hidden: { opacity: 0, y: 60, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
@@ -89,59 +88,51 @@ const HeroSection = () => {
       transition: {
         delay: 0.8,
         duration: 1.2,
-        ease: [0.25, 0.1, 0, 1],
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
 
   return (
     <div className="flex flex-col items-center">
-      {/* Main Content Section */}
+      {/* Content */}
       <motion.div
         className="w-full flex justify-center items-center md:px-0 pt-32 md:pt-40 bg-white"
-        initial={hasAnimated ? "visible" : "hidden"}
+        initial="hidden"
         animate="visible"
         variants={contentVariants}
       >
         <div className="md:max-w-3xl text-center px-4">
           <motion.h1
-            variants={contentVariants}
             className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+            variants={item}
           >
-            <motion.span className="inline-block " variants={contentVariants}>
-              Brings Your Imagination To Life With Cutting-edge 3D Printing
-              Solutions
-            </motion.span>
+            Brings Your Imagination To Life With Cutting-edge 3D Printing
+            Solutions
           </motion.h1>
 
-          <motion.p
-            variants={contentVariants}
-            className="text-xl text-[#7b7b7b] mb-8"
-          >
+          <motion.p className="text-xl text-[#7b7b7b] mb-8" variants={item}>
             "From idea to object — digitally designed, physically real."
           </motion.p>
 
           <motion.div
-            variants={buttonVariants}
-            initial={hasAnimated ? "visible" : "hidden"}
-            animate="visible"
             className="flex gap-x-3 md:gap-x-6 justify-center mb-10"
+            variants={buttonVariants}
           >
             <Link
-              href={"/Projects"}
-              className="bg-black text-white 
-              px-6 md:px-8 py-3 rounded-full text-lg font-medium transition-all hover:shadow-lg"
+              href="/Services"
+              className="bg-black text-white px-6 md:px-8 py-3 rounded-full text-lg font-medium transition-transform duration-300 hover:scale-105 hover:shadow-lg"
             >
-              View Our Work
+              View Our Services
             </Link>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Video Section */}
+      {/* Video */}
       <motion.div
         className="flex justify-center w-full md:px-0"
-        initial={hasAnimated ? "visible" : "hidden"}
+        initial="hidden"
         animate="visible"
         variants={videoContainerVariants}
       >
@@ -152,14 +143,15 @@ const HeroSection = () => {
             borderRadius: videoBorderRadius,
             overflow: "hidden",
           }}
-          className="relative w-full md:w-auto"
+          className="relative w-full md:w-auto shadow-xl"
         >
           <video
             src="/assets/3dprinted.mp4"
             autoPlay
             muted
             loop
-            className="w-full h-full object-cover pointer-events-none rounded-3xl"
+            playsInline
+            className="w-full h-full object-cover pointer-events-none"
           />
         </motion.div>
       </motion.div>
