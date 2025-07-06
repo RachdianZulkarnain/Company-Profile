@@ -127,8 +127,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     image: "/assets/C.webp",
     description: "Passionate about sustainable design and product aesthetics.",
     social: {
-      linkedin: "https://linkedin.com/in/emilyjohnson",
-      website: "https://emilyjohnson.design",
+      linkedin: "https://linkedin.com",
+      website: "",
     },
   },
   {
@@ -138,8 +138,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Engineer by heart, specializing in functional 3D-printed mechanisms.",
     social: {
-      linkedin: "https://linkedin.com/in/michaellee",
-      website: "https://michaelengineer.dev",
+      linkedin: "https://linkedin.com",
+      website: "",
     },
   },
   {
@@ -149,8 +149,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Loves combining storytelling with design to create immersive visuals.",
     social: {
-      linkedin: "https://linkedin.com/in/sofiaramirez",
-      website: "https://sofiavisuals.com",
+      linkedin: "https://linkedin.com",
+      website: "",
     },
   },
   {
@@ -160,8 +160,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Focuses on print optimization and material testing for high-detail projects.",
     social: {
-      linkedin: "https://linkedin.com/in/dylansmith",
-      website: "https://dylanprints.com",
+      linkedin: "https://linkedin.com",
+      website: "",
     },
   },
   {
@@ -171,8 +171,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Bridges user needs and design for seamless product interactions.",
     social: {
-      linkedin: "https://linkedin.com/in/aishatan",
-      website: "https://aishatan.io",
+      linkedin: "https://linkedin.com",
+      website: "",
     },
   },
   {
@@ -182,8 +182,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Builds intuitive interfaces and loves working with 3D visualization tools.",
     social: {
-      linkedin: "https://linkedin.com/in/kevinpark",
-      website: "https://kevinpark.dev",
+      linkedin: "https://linkedin.com",
+      website: "",
     },
   },
 ];

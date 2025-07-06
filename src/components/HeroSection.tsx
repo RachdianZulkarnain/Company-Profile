@@ -111,7 +111,7 @@ const HeroSection = () => {
             Solutions
           </motion.h1>
 
-          <motion.p className="text-xl text-[#7b7b7b] mb-8" variants={item}>
+          <motion.p className="text-xl text-gray-800 mb-8">
             "From idea to object — digitally designed, physically real."
           </motion.p>
 

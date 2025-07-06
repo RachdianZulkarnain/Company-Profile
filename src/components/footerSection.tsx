@@ -157,6 +157,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-black transition-colors"
+                    aria-label={`Buka ${link.href} di tab baru`}
                   >
                     <Icon size={20} />
                   </a>
