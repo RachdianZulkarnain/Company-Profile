@@ -48,7 +48,7 @@ const Write = () => {
   const { mutateAsync: createBlog, isPending } = useCreateBlog();
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-100 px-4 py-10 relative">
+    <main className="md:top-10 md:h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-100 px-4 py-32 relative">
       {/* Progress bar loading */}
       {loading && (
         <div className="fixed top-0 left-0 w-full h-1 bg-indigo-500 animate-pulse z-50" />

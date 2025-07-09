@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Wrench } from "lucide-react";
+import { Loader } from "lucide-react";
 import * as Yup from "yup";
 import useRegister from "./_hooks/useRegister";
 
@@ -111,7 +111,7 @@ const SignUp = () => {
                 disabled={isPending}
               >
                 {isPending ? (
-                  <Wrench className="animate-spin w-5 h-5" />
+                  <Loader className="animate-spin w-5 h-5" />
                 ) : (
                   "Register"
                 )}
