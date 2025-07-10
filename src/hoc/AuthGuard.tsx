@@ -19,7 +19,7 @@ export const AuthGuard = (Component: any) => {
         return <Loading/>
     }
     if (!user) {
-      return redirect("/");
+      return redirect("/sign-in");
     }
 
     return <Component {...props} />;
