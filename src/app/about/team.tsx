@@ -192,27 +192,51 @@ const Team = () => {
   return (
     <div className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <p className="text-xl uppercase tracking-wider text-gray-500 mb-6">
-            /Team
-          </p>
-          <p className="text-[#7b7b7b] max-w-3xl text-lg">
-            Our team is made up of dedicated professionals with diverse
-            expertise in design, engineering, and digital manufacturing. With
-            backgrounds in mechanical engineering, visual arts, and 3D printing
-            technology, we combine creativity and precision to deliver
-            innovative and reliable printing solutions. Each team member brings
-            unique skills — from organic modeling and CAD design to mechanical
-            testing and product finishing. Together, we are committed to
-            transforming great ideas into physical reality while ensuring
-            quality, efficiency, and client satisfaction every step of the way.
-          </p>
-        </motion.div>
+        {/* Title & Intro + Image */}
+        <div className="flex flex-col-reverse md:flex-row items-center gap-10 mb-20">
+          {/* Text Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex-1"
+          >
+            <p className="text-xl uppercase tracking-wider text-gray-500 mb-6">
+              /Team
+            </p>
+            <p className="text-[#7b7b7b] max-w-3xl text-lg leading-relaxed">
+              Our team is made up of dedicated professionals with diverse
+              expertise in design, engineering, and digital manufacturing. With
+              backgrounds in mechanical engineering, visual arts, and 3D
+              printing technology, we combine creativity and precision to
+              deliver innovative and reliable printing solutions. Each team
+              member brings unique skills — from organic modeling and CAD design
+              to mechanical testing and product finishing. Together, we are
+              committed to transforming great ideas into physical reality while
+              ensuring quality, efficiency, and client satisfaction every step
+              of the way.
+            </p>
+          </motion.div>
+
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            whileHover={{ scale: 1.02, rotate: 0.5 }}
+            className="flex-1"
+          >
+            <Image
+              src="/assets/team.webp" // ganti sesuai path gambarmu
+              alt="Team"
+              width={600}
+              height={400}
+              className="w-full h-auto rounded-2xl object-cover shadow-lg"
+            />
+          </motion.div>
+        </div>
 
         {/* Stats Section */}
         <div className="flex flex-col md:flex-row flex-wrap md:flex-nowrap justify-between w-full mb-20">
