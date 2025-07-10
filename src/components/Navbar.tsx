@@ -168,6 +168,8 @@ const Navbar = () => {
             whileTap={{ rotate: 90, scale: 0.9 }}
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"} // ✅ Accessible label
+            title={mobileMenuOpen ? "Close menu" : "Open menu"} // ✅ Tooltip on hover
           >
             {mobileMenuOpen ? (
               <X className="w-6 h-6 text-gray-600" />
@@ -216,6 +218,9 @@ const Navbar = () => {
                   <button
                     onClick={() => setBlogDropdownOpen((prev) => !prev)}
                     aria-label="Toggle Blog Dropdown"
+                    aria-haspopup="true"
+                    aria-expanded={blogDropdownOpen}
+                    aria-controls="blog-dropdown-mobile"
                   >
                     <ChevronDown className="w-5 h-5 text-gray-600" />
                   </button>

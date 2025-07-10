@@ -7,7 +7,7 @@ import {
   PiArrowArcLeft,
   PiArrowArcRight,
   PiGlobe,
-  PiLinkedinLogo
+  PiLinkedinLogo,
 } from "react-icons/pi";
 
 interface Social {
@@ -31,7 +31,8 @@ const founders: Founder[] = [
     description:
       "Mewujudkan ide dalam bentuk nyata dengan pencetakan 3D adalah pengalaman luar biasa. Microlab membantu saya merealisasikan desain dengan presisi tinggi.",
     social: {
-      linkedin: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -41,7 +42,8 @@ const founders: Founder[] = [
     description:
       "Dengan teknologi 3D printing dari Microlab, kami bisa membuat prototipe lebih cepat dan efisien. Ini sangat membantu dalam proses kreatif saya.",
     social: {
-      linkedin: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -51,7 +53,8 @@ const founders: Founder[] = [
     description:
       "Microlab adalah mitra ideal dalam proyek desain kami. Timnya responsif dan hasil cetaknya sangat memuaskan.",
     social: {
-      linkedin: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -61,7 +64,8 @@ const founders: Founder[] = [
     description:
       "Saya kagum dengan kualitas dan akurasi cetak dari Microlab. Sangat membantu dalam pengembangan komponen mekanik.",
     social: {
-      linkedin: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -71,7 +75,8 @@ const founders: Founder[] = [
     description:
       "Microlab memberikan solusi praktis dan cepat untuk kebutuhan cetak 3D dalam proyek robotika kami. Hasilnya presisi dan memuaskan.",
     social: {
-      linkedin: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
 ];
@@ -142,7 +147,7 @@ const Testimonials = () => {
             whileHover={{ scale: 1.1 }}
             onClick={prev}
             className="p-2 border rounded-full hover:bg-black/10 transition-colors"
-            aria-label="prev"
+            aria-label="Previous testimonial"
           >
             <PiArrowArcLeft className="text-2xl" />
           </motion.button>
@@ -151,7 +156,7 @@ const Testimonials = () => {
             whileHover={{ scale: 1.1 }}
             onClick={next}
             className="p-2 border rounded-full hover:bg-black/10 transition-colors"
-            aria-label="next"
+            aria-label="Next testimonial"
           >
             <PiArrowArcRight className="text-2xl" />
           </motion.button>
@@ -166,7 +171,7 @@ const Testimonials = () => {
           animate="show"
           className="grid gap-6 sm:grid-cols-2 md:grid-cols-4"
         >
-          {visibleFounders.map((founder, i) => (
+          {visibleFounders.map((founder) => (
             <motion.div
               key={founder.name}
               variants={item}
@@ -193,11 +198,23 @@ const Testimonials = () => {
                 {founder.description}
               </p>
               <div className="flex gap-3">
-                <a href={founder.social.linkedin} target="_blank">
+                <a
+                  href={founder.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`LinkedIn ${founder.name}`}
+                  title={`LinkedIn ${founder.name}`}
+                >
                   <PiLinkedinLogo className="text-gray-500 hover:text-gray-900 transition-colors" />
                 </a>
                 {founder.social.website && (
-                  <a href={founder.social.website} target="_blank">
+                  <a
+                    href={founder.social.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Website of ${founder.name}`}
+                    title={`Website of ${founder.name}`}
+                  >
                     <PiGlobe className="text-gray-500 hover:text-gray-900 transition-colors" />
                   </a>
                 )}

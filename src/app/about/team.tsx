@@ -33,22 +33,25 @@ const StatItem: React.FC<StatItemProps> = ({ label, value }) => (
     viewport={{ once: true }}
     transition={{ duration: 0.6, delay: 0.2 }}
     className="flex flex-col items-center border-b md:border-b-0 
-    md:border-l border-gray-200 px-4 py-6 first:border-l-0 
-    flex-1 text-center"
+      md:border-l border-gray-200 px-4 py-6 first:border-l-0 
+      flex-1 text-center"
   >
     <h3 className="text-[#7b7b7b] text-base mb-4">{label}</h3>
     <span className="text-4xl md:text-5xl lg:text-6xl font-light">{value}</span>
   </motion.div>
 );
 
-const SocialIcon: React.FC<{ href: string; icon: React.ReactNode }> = ({
-  href,
-  icon,
-}) => (
+const SocialIcon: React.FC<{
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+}> = ({ href, icon, label }) => (
   <Link
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={label}
+    title={label}
     className="text-gray-600 hover:text-gray-900 transition-colors"
   >
     {icon}
@@ -98,12 +101,14 @@ const TeamMember: React.FC<TeamMemberProps> = ({
           <SocialIcon
             href={social.linkedin}
             icon={<PiLinkedinLogo size={20} />}
+            label={`LinkedIn profile of ${name}`}
           />
         )}
         {social.twitter && (
           <SocialIcon
             href={social.twitter}
             icon={<PiTwitterLogo size={20} />}
+            label={`Twitter profile of ${name}`}
           />
         )}
       </div>
@@ -127,8 +132,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     image: "/assets/C.webp",
     description: "Passionate about sustainable design and product aesthetics.",
     social: {
-      // linkedin: "https://linkedin.com",
-      website: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -138,8 +143,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Engineer by heart, specializing in functional 3D-printed mechanisms.",
     social: {
-      // linkedin: "https://linkedin.com",
-      website: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -149,8 +154,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Loves combining storytelling with design to create immersive visuals.",
     social: {
-      // linkedin: "https://linkedin.com",
-      website: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -160,8 +165,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Focuses on print optimization and material testing for high-detail projects.",
     social: {
-      // linkedin: "https://linkedin.com",
-      website: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -171,8 +176,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Bridges user needs and design for seamless product interactions.",
     social: {
-      // linkedin: "https://linkedin.com",
-      website: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
   {
@@ -182,8 +187,8 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Builds intuitive interfaces and loves working with 3D visualization tools.",
     social: {
-      // linkedin: "https://linkedin.com",
-      website: "",
+      linkedin:
+        "https://www.linkedin.com/in/rachdian-muhammad-adha-zulkarnain-4280a6174/",
     },
   },
 ];
@@ -194,7 +199,6 @@ const Team = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title & Intro + Image */}
         <div className="flex flex-col-reverse md:flex-row items-center gap-10 mb-20">
-          {/* Text Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -219,7 +223,6 @@ const Team = () => {
             </p>
           </motion.div>
 
-          {/* Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -229,8 +232,8 @@ const Team = () => {
             className="flex-1"
           >
             <Image
-              src="/assets/team.webp" // ganti sesuai path gambarmu
-              alt="Team"
+              src="/assets/team.webp"
+              alt="Microlab team"
               width={600}
               height={400}
               className="w-full h-auto rounded-2xl object-cover shadow-lg"
