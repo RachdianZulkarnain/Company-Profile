@@ -84,32 +84,37 @@ const founders: Founder[] = [
 const Testimonials = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(4);
-  const [isMobile, setIsMobile] = useState(false);
+
+  const updateItemsToShow = () => {
+    const width = window.innerWidth;
+    if (width < 640) {
+      setItemsToShow(1);
+    } else if (width < 1024) {
+      setItemsToShow(2);
+    } else {
+      setItemsToShow(4);
+    }
+
+    setStartIndex((prev) => {
+      const maxStart = founders.length - itemsToShow;
+      return prev > maxStart ? maxStart : prev;
+    });
+  };
 
   useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      setItemsToShow(mobile ? 1 : 4);
-      setStartIndex((prev) => {
-        const maxStart = founders.length - (mobile ? 1 : 4);
-        return prev > maxStart ? maxStart : prev;
-      });
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    updateItemsToShow();
+    window.addEventListener("resize", updateItemsToShow);
+    return () => window.removeEventListener("resize", updateItemsToShow);
   }, []);
 
   const next = () => {
-    setStartIndex((prev) => (prev + 1) % (founders.length - itemsToShow + 1));
+    const maxStart = founders.length - itemsToShow;
+    setStartIndex((prev) => (prev < maxStart ? prev + 1 : 0));
   };
 
   const prev = () => {
-    setStartIndex((prev) =>
-      prev === 0 ? founders.length - itemsToShow : prev - 1
-    );
+    const maxStart = founders.length - itemsToShow;
+    setStartIndex((prev) => (prev > 0 ? prev - 1 : maxStart));
   };
 
   const visibleFounders = founders.slice(startIndex, startIndex + itemsToShow);
@@ -133,15 +138,15 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="px-6 py-16 md:px-16 md:py-24 mx-auto max-w-7xl">
-      <div className="flex justify-between items-center mb-12">
-        <div>
-          <h2 className="text-4xl font-bold mb-2">Testimonials</h2>
+    <section className="px-4 py-12 md:px-16 md:py-24 mx-auto max-w-7xl">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 gap-4">
+        <div className="text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2">Testimonials</h2>
           <p className="text-gray-600">
             Meet the passionate experts driving our 3D printing solutions.
           </p>
         </div>
-        <div className="hidden md:flex gap-2">
+        <div className="flex gap-2">
           <motion.button
             whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}
@@ -169,7 +174,7 @@ const Testimonials = () => {
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid gap-6 sm:grid-cols-2 md:grid-cols-4"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"
         >
           {visibleFounders.map((founder) => (
             <motion.div
