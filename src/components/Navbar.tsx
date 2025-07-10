@@ -143,11 +143,10 @@ const Navbar = () => {
                       </>
                     ) : (
                       <>
-                        <Link
-                          href="/write"
-                          className="block px-4 py-2 hover:bg-gray-100"
-                        >
-                          Create Blog
+                        <Link href="/write" className="block px-4 py-2">
+                          <Button className="w-full text-sm bg-blue-600 hover:bg-blue-700 text-white">
+                            Create Blog
+                          </Button>
                         </Link>
                         <button
                           onClick={clearAuth}
@@ -265,13 +264,15 @@ const Navbar = () => {
                               setMobileMenuOpen(false);
                               setBlogDropdownOpen(false);
                             }}
-                            className="text-sm text-gray-600 hover:text-black"
+                            className="w-fit"
                           >
-                            Create Blog
+                            <Button className="w-full text-sm bg-blue-600 hover:bg-blue-700 text-white">
+                              Create Blog
+                            </Button>
                           </Link>
                           <Button
                             variant="destructive"
-                            className="w-fit text-sm animate-pulse"
+                            className="w-fit text-sm"
                             onClick={() => {
                               clearAuth();
                               setMobileMenuOpen(false);
