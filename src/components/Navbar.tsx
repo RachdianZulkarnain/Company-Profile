@@ -147,11 +147,11 @@ const Navbar = () => {
                           href="/write"
                           className="block px-4 py-2 hover:bg-gray-100"
                         >
-                          Write Blog
+                          Create Blog
                         </Link>
                         <button
                           onClick={clearAuth}
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+                          className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 animate-pulse"
                         >
                           Logout
                         </button>
@@ -262,11 +262,11 @@ const Navbar = () => {
                             }}
                             className="text-sm text-gray-600 hover:text-black"
                           >
-                            Write Blog
+                            Create Blog
                           </Link>
                           <Button
                             variant="destructive"
-                            className="w-fit text-sm"
+                            className="w-fit text-sm animate-pulse"
                             onClick={() => {
                               clearAuth();
                               setMobileMenuOpen(false);

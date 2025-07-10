@@ -26,7 +26,7 @@ const useLogin = () => {
     onSuccess: (data) => {
       onAuthSuccess({ user: data });
       toast.success("sign in success");
-      router.replace("/");
+      router.replace("/blog");
     },
     onError: (error: AxiosError<{ message: string; code: number }>) => {
       toast.error(error.response?.data?.message ?? "Somthing went wrong!");

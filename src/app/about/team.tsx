@@ -127,7 +127,7 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     image: "/assets/C.webp",
     description: "Passionate about sustainable design and product aesthetics.",
     social: {
-      linkedin: "https://linkedin.com",
+      // linkedin: "https://linkedin.com",
       website: "",
     },
   },
@@ -138,7 +138,7 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Engineer by heart, specializing in functional 3D-printed mechanisms.",
     social: {
-      linkedin: "https://linkedin.com",
+      // linkedin: "https://linkedin.com",
       website: "",
     },
   },
@@ -149,7 +149,7 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Loves combining storytelling with design to create immersive visuals.",
     social: {
-      linkedin: "https://linkedin.com",
+      // linkedin: "https://linkedin.com",
       website: "",
     },
   },
@@ -160,7 +160,7 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Focuses on print optimization and material testing for high-detail projects.",
     social: {
-      linkedin: "https://linkedin.com",
+      // linkedin: "https://linkedin.com",
       website: "",
     },
   },
@@ -171,7 +171,7 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Bridges user needs and design for seamless product interactions.",
     social: {
-      linkedin: "https://linkedin.com",
+      // linkedin: "https://linkedin.com",
       website: "",
     },
   },
@@ -182,7 +182,7 @@ const teamMembers: Omit<TeamMemberProps, "index">[] = [
     description:
       "Builds intuitive interfaces and loves working with 3D visualization tools.",
     social: {
-      linkedin: "https://linkedin.com",
+      // linkedin: "https://linkedin.com",
       website: "",
     },
   },

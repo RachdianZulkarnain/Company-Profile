@@ -31,7 +31,7 @@ const founders: Founder[] = [
     description:
       "Mewujudkan ide dalam bentuk nyata dengan pencetakan 3D adalah pengalaman luar biasa. Microlab membantu saya merealisasikan desain dengan presisi tinggi.",
     social: {
-      linkedin: "https://linkedin.com",
+      linkedin: "",
     },
   },
   {
@@ -41,7 +41,7 @@ const founders: Founder[] = [
     description:
       "Dengan teknologi 3D printing dari Microlab, kami bisa membuat prototipe lebih cepat dan efisien. Ini sangat membantu dalam proses kreatif saya.",
     social: {
-      linkedin: "https://linkedin.com",
+      linkedin: "",
     },
   },
   {
@@ -51,7 +51,7 @@ const founders: Founder[] = [
     description:
       "Microlab adalah mitra ideal dalam proyek desain kami. Timnya responsif dan hasil cetaknya sangat memuaskan.",
     social: {
-      linkedin: "https://linkedin.com",
+      linkedin: "",
     },
   },
   {
@@ -61,7 +61,7 @@ const founders: Founder[] = [
     description:
       "Saya kagum dengan kualitas dan akurasi cetak dari Microlab. Sangat membantu dalam pengembangan komponen mekanik.",
     social: {
-      linkedin: "https://linkedin.com",
+      linkedin: "",
     },
   },
   {
@@ -71,7 +71,7 @@ const founders: Founder[] = [
     description:
       "Microlab memberikan solusi praktis dan cepat untuk kebutuhan cetak 3D dalam proyek robotika kami. Hasilnya presisi dan memuaskan.",
     social: {
-      linkedin: "https://linkedin.com",
+      linkedin: "",
     },
   },
 ];
